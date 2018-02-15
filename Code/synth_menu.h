@@ -2,6 +2,9 @@
 /* Author: Shawn Clake */
 /* Date: Feb, 2018 */
 
+#ifndef __SYNTH_MENU__
+#define __SYNTH_MENU__
+
 #include <stdint.h>
 #include "synth_dds_waveforms.h"
 #include "helpers.h"
@@ -50,4 +53,14 @@ class SynthMenu
 		
 		void pressMode(void);
 		void pressNext(void);
+	
+			
+		int getTempo();
+		WaveType getWaveType();
+		int getVoices();
+		int getSpread();
+		int getPitch();
+		int getNote();
 };
+
+#endif

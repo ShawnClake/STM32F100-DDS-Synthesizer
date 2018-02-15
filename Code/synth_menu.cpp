@@ -30,9 +30,35 @@ void SynthMenu::displayPlayback(void)
 	char line1c[16] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 	line1c[i1] = 'W'; i1++;
 	line1c[i1] = ':'; i1++;
-	line1c[i1] = 's'; i1++;
-	line1c[i1] = 'q'; i1++;
-	line1c[i1] = 'r'; i1++;
+	
+	if(this->waveType == WaveType::Saw)
+	{
+		line1c[i1] = 's'; i1++;
+		line1c[i1] = 'a'; i1++;
+		line1c[i1] = 'w'; i1++;
+	}
+	else if(this->waveType == WaveType::Sine)
+	{
+		line1c[i1] = 's'; i1++;
+		line1c[i1] = 'i'; i1++;
+		line1c[i1] = 'n'; i1++;
+	}
+	else if(this->waveType == WaveType::Square)
+	{
+		line1c[i1] = 's'; i1++;
+		line1c[i1] = 'q'; i1++;
+		line1c[i1] = 'r'; i1++;
+	}
+	else if(this->waveType == WaveType::Triangle)
+	{
+		line1c[i1] = 't'; i1++;
+		line1c[i1] = 'r'; i1++;
+		line1c[i1] = 'i'; i1++;
+	}
+	
+	//line1c[i1] = 's'; i1++;
+	//line1c[i1] = 'q'; i1++;
+	//line1c[i1] = 'r'; i1++;
 	line1c[i1] = ' '; i1++;
 	line1c[i1] = 'T'; i1++;
 	line1c[i1] = ':'; i1++;
@@ -313,4 +339,30 @@ void SynthMenu::nextOption(void)
 			this->spread = 1;
 	}
 
+}
+
+int SynthMenu::getTempo()
+{
+	return this->tempo;
+}
+
+WaveType SynthMenu::getWaveType()
+{
+	return this->waveType;
+}
+int SynthMenu::getVoices()
+{
+	return this->voices;
+}
+int SynthMenu::getSpread()
+{
+	return this->spread;
+}
+int SynthMenu::getPitch()
+{
+	return this->pitch;
+}
+int SynthMenu::getNote()
+{
+	return this->note;
 }

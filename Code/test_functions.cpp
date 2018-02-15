@@ -11,6 +11,7 @@
 #include "synth_menu.h"
 #include "synth_input.h"
 #include "synth_output.h"
+#include "synth.h"
 
 int main(void)
 {
@@ -24,8 +25,9 @@ int main(void)
 	SynthMenu* menu = new SynthMenu();
 	SynthInput* input = new SynthInput();
 	SynthOutput* output = new SynthOutput();
+	//Synth synth(menu);
 	
-
+bool blinky = false;
 	
 	while(1)
 	{
@@ -48,6 +50,8 @@ int main(void)
 		CarrierOutput carrierOutput;
 		carrierOutput.led1 = true;
 		
+		
+		
 		if(carrierInput.btnRedRising)
 		{
 			menu->pressMode();
@@ -60,6 +64,13 @@ int main(void)
 			carrierOutput.led3 = true;
 		}
 
+		blinky = !blinky;
+		carrierOutput.led4 = blinky;
+		//delay(1309000 * 2); //2618000 is roughly 60 BPM
+		
+		//synth.pollMenu();
+		//delay(synth.getTempoDelay());
+		
 		menu->display();
 		output->syncToOutputs(carrierOutput);
 		

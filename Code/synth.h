@@ -7,8 +7,10 @@
 
 #include <stdint.h>
 #include "synth_dds_waveforms.h"
+#include "synth_menu.h"
 
 #define SAMPLE_RATE       24000UL 
+#define CYCLES_PER_MS     2618
 
 struct DDS {
 	uint16_t increment;
@@ -19,7 +21,9 @@ struct DDS {
 class Synth
 {
 	private:
+		SynthMenu* synthMenu;
 		DDS voice;
+		int tempoDelay;
 	
 		Waveforms dds_waveforms;
 	
@@ -27,12 +31,11 @@ class Synth
 		void setup_pwm_audio_timer();
 	
 	public:
+		int getTempoDelay();
+		void pollMenu();
 		void setup();
-		Synth();
+		Synth(SynthMenu* menu);
 		
-	
-	
-	
 };
 
 
