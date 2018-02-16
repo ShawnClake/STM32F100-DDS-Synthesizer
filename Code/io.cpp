@@ -74,6 +74,9 @@ void initLEDConfigs(void)
 	// LED 4
 	GPIOA->CRH |= GPIO_CRH_MODE12;
   GPIOA->CRH &= ~GPIO_CRH_CNF12;
+	
+	GPIOC->CRH |= GPIO_CRH_MODE9 | GPIO_CRH_MODE8 ;
+  GPIOC->CRH &= ~GPIO_CRH_CNF9 & ~GPIO_CRH_CNF8 ;
 }
 
 uint8_t readSwitches(void)

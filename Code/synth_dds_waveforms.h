@@ -17,9 +17,7 @@ enum class WaveType
 	Square
 };
 
-class Waveforms
-{
-	public:
+
 	const int8_t Sine[256] = { 
 			0, 3, 6, 9, 12, 15, 18, 21,
 			24, 27, 30, 34, 37, 39, 42, 45,
@@ -404,8 +402,6 @@ class Waveforms
 			-105, -109, -114, -116, -115, -110, -104, -99,
 			-99, -106, -116, -126, -128, -117, -91, -50
 		};
-	
-};
 
 #endif
 

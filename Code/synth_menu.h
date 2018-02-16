@@ -18,12 +18,21 @@ enum class Option
 	playback
 };
 
+struct OptionStates
+{
+	bool tempo = true;
+	bool voices = true;
+	bool detune = true;
+	bool wavetype = true;
+};
+
 class SynthMenu
 {
 	private:
 		bool settingsMode = false;
 		bool inOption = false;
 		Option option;
+		
 	
 		// Current option values
 		int tempo;
@@ -47,13 +56,14 @@ class SynthMenu
 		//void saveOption(void);
 	
 	public:
+		OptionStates optionStates;
+	
 		SynthMenu();
 	
 		void display(void);
 		
 		void pressMode(void);
 		void pressNext(void);
-	
 			
 		int getTempo();
 		WaveType getWaveType();
@@ -61,6 +71,8 @@ class SynthMenu
 		int getSpread();
 		int getPitch();
 		int getNote();
+	
+		bool isSettingsMode();
 };
 
 #endif

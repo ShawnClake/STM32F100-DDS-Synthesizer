@@ -152,7 +152,7 @@ void SynthMenu::displaySettings(void)
 		line1 = "SettingV";
 	else
 		line1 = "Setting>";
-	char num[4] = {' ', ' ', ' ', ' '};
+	char num[5] = {' ', ' ', ' ', ' ', ' '};
 	
 	if(this->option == Option::tempo)
 	{
@@ -316,6 +316,8 @@ void SynthMenu::nextOption(void)
 			this->waveType = WaveType::Triangle;
 		else if(this->waveType == WaveType::Triangle)
 			this->waveType = WaveType::Saw;
+		
+		this->optionStates.wavetype = true;
 	}
 	
 	if(this->option == Option::tempo)
@@ -323,6 +325,8 @@ void SynthMenu::nextOption(void)
 		this->tempo += 10;
 		if(this->tempo > 240)
 			this->tempo = 60;
+		
+		this->optionStates.tempo = true;
 	}
 	
 	if(this->option == Option::voices)
@@ -330,6 +334,8 @@ void SynthMenu::nextOption(void)
 		this->voices += 1;
 		if(this->voices > 4)
 			this->voices = 1;
+		
+		this->optionStates.voices = true;
 	}
 	
 	if(this->option == Option::detune)
@@ -337,6 +343,8 @@ void SynthMenu::nextOption(void)
 		this->spread += 1;
 		if(this->spread > 10)
 			this->spread = 1;
+		
+		this->optionStates.detune = true;
 	}
 
 }
@@ -365,4 +373,9 @@ int SynthMenu::getPitch()
 int SynthMenu::getNote()
 {
 	return this->note;
+}
+
+bool SynthMenu::isSettingsMode()
+{
+	return this->settingsMode;
 }
