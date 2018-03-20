@@ -4,10 +4,14 @@
 
 #include "stm32f10x.h"
 #include "synth.h"
+#include "pwm.h"
 
 Synth::Synth(SynthMenu* menu)
 {
 	this->synthMenu = menu;
+	this->setup_sample_timer();
+	this->setup_pwm_audio_timer();
+	this->setup_tempo_timer();
 }
 
 void Synth::pollMenu()
@@ -23,12 +27,13 @@ void Synth::pollMenu()
 	
 	if(this->synthMenu->optionStates.tempo)
 	{
-		Helpers helpers;
-		int millisDelay = 1000 / (this->synthMenu->getTempo() / 60); // Current delay with logic in place means 2618 = 1 ms of delay, as we add in more delaying this could shrink further
-		this->tempoDelay = millisDelay * CYCLES_PER_MS; // This is how many cycles of delay function it takes to get ~1ms.
+		//Helpers helpers;
+		//int millisDelay = 1000 / (this->synthMenu->getTempo() / 60); // Current delay with logic in place means 2618 = 1 ms of delay, as we add in more delaying this could shrink further
+		//this->tempoDelay = millisDelay * CYCLES_PER_MS; // This is how many cycles of delay function it takes to get ~1ms.
 		//return millisDelay * CYCLES_PER_MS; // This is how many cycles of delay function it takes to get ~1ms.
 		
-		this->synthMenu->optionStates.tempo = false;
+		//this->synthMenu->optionStates.tempo = false;
+		changeTempo(this->synthMenu->getTempo());
 	}
 	
 	if(this->synthMenu->optionStates.wavetype)
@@ -51,11 +56,16 @@ void Synth::setup()
 
 void Synth::setup_sample_timer()
 {
-	
+	initPWMSampler(SAMPLE_RATE);
 }
 void Synth::setup_pwm_audio_timer()
 {
-	
+	initPWMAudio();
+}
+
+void Synth::setup_tempo_timer()
+{
+	initTempoTicker();
 }
 
 void Synth::setWaveform(WaveType wave)
@@ -130,7 +140,7 @@ void Synth::playNote(uint16_t note, RhythmType rhythmType, float ratioCutOff)
 	
 	this->noteProcessing();
 	
-	int noteDelay = 0;
+	/*int noteDelay = 0;
 	
 	if(rhythmType == RhythmType::whole)
 	{
@@ -150,15 +160,49 @@ void Synth::playNote(uint16_t note, RhythmType rhythmType, float ratioCutOff)
 	if(rhythmType == RhythmType::eigth)
 	{
 		noteDelay = this->getTempoDelay() / 2;
-	}
+	}*/
 	
-	this->delayNote(noteDelay * (1.0 - ratioCutOff));
+	/*this->delayNote(noteDelay * (1.0 - ratioCutOff));
 	
 	this->voices[0].increment = REST;
 	this->voices[1].increment = REST;
 	this->voices[2].increment = REST;
 	this->voices[3].increment = REST;
 	
-	this->delayNote(noteDelay * ratioCutOff);
+	this->delayNote(noteDelay * ratioCutOff);*/
 	// do rhythm delays after this point
+}
+
+int iamtheguy = 0;
+
+void Synth::generateWave()
+{
+	//uint16_t total = 0;
+	
+	//for(uint8_t i = 0; i < this->synthMenu->getVoices(); i++)
+	//{
+		//total += (int8_t)*(this->voices[i].sample + (this->voices[i].accumulator >> 8));
+		//this->voices[i].accumulator += voices[i].increment;
+	//}
+	
+	uint16_t arrr = this->voices[iamtheguy].increment;
+	//arrr = this->voices[0].increment;
+	TIM1->ARR = arrr;
+	TIM1->CCR1 = arrr / 2;
+	/*arrr -= 20;
+	if(arr < 50)
+		arr = 1024;*/
+	
+	iamtheguy++;
+	if(iamtheguy >= this->synthMenu->getVoices())
+		iamtheguy = 0;
+	
+	/*total = total / this->synthMenu->getVoices();
+	total += 128;
+	if(total > 255)
+		total = 255;
+	if(total < 0)
+		total = 0;*/
+	//TIM1->CCR1 = total;
+	
 }

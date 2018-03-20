@@ -31,6 +31,7 @@ class Synth
 	
 		void setup_sample_timer();
 		void setup_pwm_audio_timer();
+		void setup_tempo_timer();
 		
 		void setWaveform(WaveType wave);
 	
@@ -47,6 +48,8 @@ class Synth
 		Synth(SynthMenu* menu);
 	
 		void playNote(uint16_t note, RhythmType rhythmType, float ratioCutOff);
+	
+		void generateWave();
 		
 };
 

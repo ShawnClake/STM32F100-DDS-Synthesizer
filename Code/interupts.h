@@ -46,6 +46,9 @@ void modeInterupt(void)
 	
 	// Enable the EXTI9_5 interupt handler
 	NVIC->ISER[0] |= NVIC_ISER_SETENA_23;
+	
+	NVIC->ISER[0] |= NVIC_ISER_SETENA_28;
+	NVIC->ISER[0] |= NVIC_ISER_SETENA_29;
 }
 
 #endif
