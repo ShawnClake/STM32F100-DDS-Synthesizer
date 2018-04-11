@@ -55,6 +55,15 @@ void initSwitchConfigs(void)
 	
 	// Switch 5
 	GPIOA->CRL |= GPIO_CRL_MODE5 | GPIO_CRL_CNF5_0;
+	
+	// Button 1
+	GPIOB->CRH |= GPIO_CRH_MODE10 | GPIO_CRH_CNF10_0;
+	
+	// Button 2
+	GPIOB->CRH |= GPIO_CRH_MODE11 | GPIO_CRH_CNF11_0;
+	
+	// Button 3
+	GPIOB->CRH |= GPIO_CRH_MODE12 | GPIO_CRH_CNF12_0;
 }
 
 void initLEDConfigs(void)
@@ -77,6 +86,14 @@ void initLEDConfigs(void)
 	
 	GPIOC->CRH |= GPIO_CRH_MODE9 | GPIO_CRH_MODE8 ;
   GPIOC->CRH &= ~GPIO_CRH_CNF9 & ~GPIO_CRH_CNF8 ;
+	
+	// Offboard LED 1
+	GPIOB->CRH |= GPIO_CRH_MODE13;
+  GPIOB->CRH &= ~GPIO_CRH_CNF13;
+	
+	// Offboard LED 2
+	GPIOB->CRH |= GPIO_CRH_MODE14;
+  GPIOB->CRH &= ~GPIO_CRH_CNF14;
 }
 
 uint8_t readSwitches(void)

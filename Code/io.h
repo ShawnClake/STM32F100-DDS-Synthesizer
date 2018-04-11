@@ -14,6 +14,8 @@ void initPortCClock(void);
 
 void initLEDConfigs(void);
 
+void initSwitchConfigs(void);
+
 uint8_t readSwitches(void);
 
 void setLEDs(uint8_t leds);

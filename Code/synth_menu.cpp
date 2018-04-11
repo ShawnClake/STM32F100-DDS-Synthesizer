@@ -379,3 +379,13 @@ bool SynthMenu::isSettingsMode()
 {
 	return this->settingsMode;
 }
+
+void SynthMenu::setPitch(uint32_t p)
+{
+	this->pitch = p;
+}
+
+void SynthMenu::setNote(uint32_t p)
+{
+	this->note = p;
+}

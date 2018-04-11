@@ -44,11 +44,20 @@ void modeInterupt(void)
 	EXTI->IMR |= EXTI_IMR_MR9;
 	EXTI->FTSR |= EXTI_FTSR_TR9;
 	
+	/* Next 4 lines setup green button (PB9) as an interupt with a falling edge trigger and unmasked interupt */ 
+	//AFIO->EXTICR[2] &= ~AFIO_EXTICR3_EXTI10;   // resets bottom 4 bits to 0's
+	//AFIO->EXTICR[2] |= AFIO_EXTICR3_EXTI10_PB; // puts a 1 into bit0 to use port B
+	//EXTI->IMR |= EXTI_IMR_MR10;
+	//EXTI->FTSR |= EXTI_FTSR_TR10;
+	
 	// Enable the EXTI9_5 interupt handler
 	NVIC->ISER[0] |= NVIC_ISER_SETENA_23;
 	
+	// Set up timer interupt handlers
 	NVIC->ISER[0] |= NVIC_ISER_SETENA_28;
 	NVIC->ISER[0] |= NVIC_ISER_SETENA_29;
+	
+	//NVIC->ISER[1] |= NVIC_ISER_SETENA_9;
 }
 
 #endif

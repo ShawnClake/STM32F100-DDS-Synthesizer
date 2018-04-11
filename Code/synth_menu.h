@@ -70,6 +70,8 @@ class SynthMenu
 		int getVoices();
 		int getSpread();
 		int getPitch();
+		void setPitch(uint32_t p);
+		void setNote(uint32_t p);
 		int getNote();
 	
 		bool isSettingsMode();

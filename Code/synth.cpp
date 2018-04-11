@@ -98,10 +98,10 @@ void Synth::setWaveform(WaveType wave)
 void Synth::applyPitchShift()
 {
 	float pitchShift = (float)this->synthMenu->getPitch() / 100.0;
-	this->voices[0].increment *= pitchShift;
-	this->voices[1].increment *= pitchShift;
-	this->voices[2].increment *= pitchShift;
-	this->voices[3].increment *= pitchShift;
+	this->voices[0].increment = this->voices[0].accumulator * pitchShift;
+	this->voices[1].increment = this->voices[1].accumulator * pitchShift;
+	this->voices[2].increment = this->voices[2].accumulator * pitchShift;
+	this->voices[3].increment = this->voices[3].accumulator * pitchShift;
 }
 
 void Synth::applyDetune()
@@ -133,12 +133,15 @@ void Synth::playNote(uint16_t note, RhythmType rhythmType, float ratioCutOff)
 	
 	// Set all voices to the new note regardless of voice count
 	// We can do this because the extra voices just wont play if we dont have a high enough count
-	this->voices[0].increment = note;
-	this->voices[1].increment = note;
-	this->voices[2].increment = note;
-	this->voices[3].increment = note;
+	this->voices[0].accumulator = note;
+	this->voices[1].accumulator = note;
+	this->voices[2].accumulator = note;
+	this->voices[3].accumulator = note;
 	
 	this->noteProcessing();
+	
+	/*if(note > 10)
+		this->noteProcessing();*/
 	
 	/*int noteDelay = 0;
 	
@@ -184,6 +187,8 @@ void Synth::generateWave()
 		//total += (int8_t)*(this->voices[i].sample + (this->voices[i].accumulator >> 8));
 		//this->voices[i].accumulator += voices[i].increment;
 	//}
+	
+	this->noteProcessing();
 	
 	uint16_t arrr = this->voices[iamtheguy].increment;
 	//arrr = this->voices[0].increment;

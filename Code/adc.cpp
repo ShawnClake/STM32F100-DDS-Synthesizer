@@ -42,7 +42,7 @@ void initADC(void)
 	ADC1->SMPR2 |= 0xFFFFFFFF; // 64, 128, 256 - alternatively 0x1C0
 	
 	// sets channel 1 as the default channel to read
-	ADC1->SQR3 = 0x1;
+	ADC1->SQR3 = 0x2;
 }
 
 uint32_t readADC(uint8_t channel)
@@ -52,7 +52,7 @@ uint32_t readADC(uint8_t channel)
 	
 	// Send another high to ADON to execute conversion
 	ADC1->CR2 |= 1;
-	delayADC(1200000);
+	delayADC(12000);
 	while(ADC1->SR == 0)
 	{
 		

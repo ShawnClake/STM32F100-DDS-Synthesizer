@@ -27,4 +27,14 @@ void SynthOutput::syncToOutputs(CarrierOutput output)
 	else
 		GPIOA->BSRR = GPIO_BSRR_BS12;
 	
+	if(output.led5)
+		GPIOB->BSRR = GPIO_BSRR_BR13;
+	else
+		GPIOB->BSRR = GPIO_BSRR_BS13;
+	
+	if(output.led6)
+		GPIOB->BSRR = GPIO_BSRR_BR14;
+	else
+		GPIOB->BSRR = GPIO_BSRR_BS14;
+	
 }

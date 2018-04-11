@@ -14,12 +14,17 @@ struct CarrierOutput
 	bool led3;
 	bool led4;
 	
+	bool led5;
+	bool led6;
+	
 	CarrierOutput()
 	{
 		this->led1 = false;
 		this->led2 = false;
 		this->led3 = false;
 		this->led4 = false;
+		this->led5 = false;
+		this->led6 = false;
 
 	}
 };
